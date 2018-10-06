@@ -1,0 +1,33 @@
+.vertical-center {
+  min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+  min-height: 100vh !important; /* These two lines are counted as one :-)       */
+
+  display: flex !important;
+  align-items: center !important;
+}
+
+body { 
+    padding-top: 15vh !important;
+    background-image: url("../img/bg-pattern.png")
+}
+
+.container-fluid { 
+    padding: 0px !important;
+}
+
+.pt-70px {
+    padding-top: 70px;
+}
+
+.fixed-top.scrolled {
+    background-color: #fff !important;
+    transition: background-color 200ms linear;
+}
+
+.select2 {
+    width:100%!important;
+}
+
+#shortestPathProgressBar {
+    width: 0%
+}

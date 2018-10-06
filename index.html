@@ -1,0 +1,341 @@
+<html>
+
+<head>
+    <title>Home | CableMapper</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+    <link href="dist/css/index.css" rel="stylesheet" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+    <script src="dist/js/index.js"></script>
+</head>
+
+<body id="page-top">
+    <div class="container-fluid px-0">
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+            <div class="container-fluid px-0">
+                <a class="navbar-brand js-scroll-trigger" href="#page-top">Cable Mapper</a>
+                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                    aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    Menu
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link js-scroll-trigger" href="#shortestPathSection">Shortest Path</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownRackMenuLink" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Rack
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownRackMenuLink">
+                                <a class="dropdown-item" href="#createRackSection">Create Rack</a>
+                                <a class="dropdown-item" href="#editRackSection">Edit Rack</a>
+                                <a class="dropdown-item" href="#deleteRackSection">Delete Rack</a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPanelMenuLink" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Panel
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPanelMenuLink">
+                                <a class="dropdown-item" href="#createPanelSection">Create Panel</a>
+                                <a class="dropdown-item" href="#editPanelSection">Edit Panel</a>
+                                <a class="dropdown-item" href="#deletePanelSection">Delete Panel</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- End Navbar -->
+        <!-- ***************************** -->
+        <!-- Header -->
+        <header class="h-100">
+            <div class="jumbotron jumbotron-fluid bg-light">
+                <div class="container">
+                    <h1 class="display-4">Hello, Here's a Cable Mapper</h1>
+                    <p class="lead">A powerful tool for finding your way through cables</p>
+                    <a href="#shortestPathSection" class="btn btn-outline-primary">Let's Begin</a>
+                </div>
+            </div>
+            <div id="shortestPath"></div>
+        </header>
+        <!-- End Header -->
+        <!-- ***************************** -->
+        <!-- Shortest Path -->
+        <section class="h-100" id="shortestPathSection">
+            <div class="jumbotron jumbotron-fluid bg-light h-75">
+                <div class="container">
+                    <h3 class="display-4">Shortest Path</h3>
+                    <p class="lead">Just like OSPF does</p>
+                    <form id="findShortestPathForm">
+                        <div class="row">
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <!--<label for="sourceRackName">Source Rack</label>-->
+                                    <select class="form-control form-control-lg select2" id="sourceRackName" name="sourceRackName">
+                                        <!--<option value="" disabled selected>Source Rack</option>-->
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <!--<label for="mediaType">Media Type</label>-->
+                                    <select class="form-control form-control-lg select2" id="mediaType" name="mediaType">
+                                        <option value=""></option>
+                                        <option value="SM">SM</option>
+                                        <option value="MM">MM</option>
+                                        <option value="ETH">ETH</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <!--<label for="destinationRackName">Destination Rack</label>-->
+                                    <select class="form-control form-control-lg select2" id="destinationRackName" name="destinationRackName">
+                                        <!--<option value="" disabled selected>Destination Rack</option>-->
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-10"></div>
+                            <div class="col-md-2">
+                                <button type="submit" class="btn btn-primary float-right">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="container pt-5">
+                    <ul class="nav nav-pills nav-fill" id="shortestPathUl">
+                        <!-- Javascript will put results here -->
+                    </ul>
+                    <br />
+                    <div class="progress" id="shortestPathProgress">
+                        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
+                            aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%" id="shortestPathProgressBar"></div>
+                    </div>
+                </div>
+            </div>
+            <div id="createRack"></div>
+        </section>
+        <!-- End Shortest Path -->
+        <!-- ***************************** -->
+        <!-- Rack -->
+        <!-- Create Rack -->
+        <section id="createRackSection" class="h-100">
+            <div class="jumbotron jumbotron-fluid bg-light">
+                <div class="container">
+                    <h1 class="display-4">Create Rack</h1>
+                    <p class="lead" id="createRackLeadText"></p>
+                    <form id="createRackForm">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <!--<label for="sourceRackName">Source Rack</label>-->
+                                    <input type="text" class="form-control" name="createRackName" id="createRackName"
+                                        placeholder="Rack Name">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <!--<label for="sourceRackName">Source Rack</label>-->
+                                    <input type="text" class="form-control" name="createRackSite" id="createRackSite"
+                                        placeholder="Rack Site">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <!--<label for="sourceRackName">Source Rack</label>-->
+                                    <input type="text" class="form-control" name="createRackBuilding" id="createRackBuilding"
+                                        placeholder="Rack Building">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <!--<label for="sourceRackName">Source Rack</label>-->
+                                    <input type="text" class="form-control" name="createRackRoom" id="createRackRoom"
+                                        placeholder="Rack Room">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-10"></div>
+                            <div class="col-md-2">
+                                <button type="submit" class="btn btn-primary float-right" id="createRackSubmitButton">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div id="editRack"></div>
+        </section>
+        <!-- End Create Rack -->
+        <!-- Edit Rack -->
+        <section id="editRackSection" class="h-100">
+            <div class="jumbotron jumbotron-fluid bg-light">
+                <div class="container">
+                    <h1 class="display-4">Edit Rack</h1>
+                    <p class="lead"></p>
+
+                </div>
+            </div>
+            <div id="deleteRack"></div>
+        </section>
+        <!-- End Edit Rack -->
+        <!-- Delete Rack -->
+        <section id="deleteRackSection" class="h-100">
+            <div class="jumbotron jumbotron-fluid bg-light">
+                <div class="container">
+                    <h1 class="display-4">Delete Rack</h1>
+                    <p class="lead" id="deleteRackLeadText"></p>
+                    <form id="deleteRackForm">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <!--<label for="sourceRackName">Source Rack</label>-->
+                                    <select class="form-control form-control-lg select2" id="deleteRackId" name="deleteRackId">
+                                        <!--<option value="" disabled selected>Select a rack to delete</option>-->
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+
+                            <div class="col-md-10"></div>
+                            <div class="col-md-2">
+                                <button type="submit" class="btn btn-primary float-right" id="deleteRackSubmitButton">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div id="createPanel"></div>
+        </section>
+        <!-- End Delete Rack -->
+        <!-- End Rack -->
+        <!-- ***************************** -->
+        <!-- Panel -->
+        <!-- Create Panel -->
+        <section id="createPanelSection" class="h-100">
+            <div class="jumbotron jumbotron-fluid bg-light">
+                <div class="container">
+                    <h1 class="display-4">Create Panel</h1>
+                    <p class="lead" id="createPanelLeadText"></p>
+                    <form id="createPanelForm">
+                        <div class="row">
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <!--<label for="sourceRackName">Source Rack</label>-->
+                                    <select class="form-control form-control-lg select2" id="createPanelSourceRack"
+                                        name="createPanelSourceRack">
+                                        <!--<option value="" disabled selected>Source Rack</option>-->
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <!--<label for="mediaType">Media Type</label>-->
+                                    <select class="form-control form-control-lg select2" id="createPanelMediaType" name="createPanelMediaType">
+                                        <option value=""></option>
+                                        <option value="SM">SM</option>
+                                        <option value="MM">MM</option>
+                                        <option value="ETH">ETH</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <!--<label for="sourceRackName">Source Rack</label>-->
+                                    <select class="form-control form-control-lg select2" id="createPanelDestinationRack"
+                                        name="createPanelDestinationRack">
+                                        <!--<option value="" disabled selected>Source Rack</option>-->
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <!--<label for="sourceRackName">Source Rack</label>-->
+                                    <input type="text" class="form-control form-control-sm" name="createPanelName" id="createPanelName"
+                                        placeholder="Panel Name">
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <!--<label for="sourceRackName">Source Rack</label>-->
+                                    <input type="number" class="form-control form-control-sm" name="createPanelNumOfPorts"
+                                        id="createPanelNumOfPorts" placeholder="Number of Ports">
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <!--<label for="sourceRackName">Source Rack</label>-->
+                                    <select class="form-control form-control-lg select2" id="createPanelConnector" name="createPanelConnector">
+                                        <option value=""></option>
+                                        <option value="LC">LC</option>
+                                        <option value="ST">ST</option>
+                                        <option value="RJ-45">RJ-45</option>
+                                        <option value="SC">SC</option>
+                                        <option value="FC">FC</option>
+                                        <option value="MPO">MPO</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-10"></div>
+                            <div class="col-md-2">
+                                <button type="submit" class="btn btn-primary float-right" id="createPanelSubmitButton">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div id="editPanel"></div>
+        </section>
+        <!-- End Create Panel -->
+        <!-- Edit Panel -->
+        <section id="editPanelSection" class="h-100">
+            <div class="jumbotron jumbotron-fluid bg-light">
+                <div class="container">
+                    <h1 class="display-4">Edit Panel</h1>
+                    <p class="lead"></p>
+
+                </div>
+            </div>
+            <div id="deletePanel"></div>
+        </section>
+        <!-- End Edit Panel -->
+        <!-- Delete Panel -->
+        <section id="deletePanelSection" class="h-100">
+            <div class="jumbotron jumbotron-fluid bg-light">
+                <div class="container">
+                    <h1 class="display-4">Delete Panel</h1>
+                    <p class="lead"></p>
+
+                </div>
+            </div>
+        </section>
+        <!-- End Delete Panel -->
+        <!-- End Panel -->
+    </div>
+</body>
+
+</html>
